@@ -15,7 +15,7 @@ Ulteriori dettagli in merito alla posizione di OLAF e alle configurazioni
 L'unico vincolo relativo all'installazione del database di enrichment è la presenza
 di un'istanza MongoDB alla porta 27017 (standard) locale.
 
-Per installare: `node arco_setup.js *import_collection*`   
+Per installare: `node arco_setup.js arco *import_collection*`
   
 Il parametro da linea di comando:
 
