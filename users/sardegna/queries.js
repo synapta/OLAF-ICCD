@@ -437,11 +437,11 @@ function authorSkip(request, driver) {
 }
 
 function storeMatching(item, target) {
-    return composeWriteQuery(insertMatchValidation(item, target, 'http://olaf.datipubblici.org/olaf/sameAs/agents-sardegna'));
+    return composeWriteQuery(insertMatchValidation(item, target, 'http://olaf.datipubblici.org/olaf/sameAs/Sardegna/Agents'));
 }
 
 function storeSkip(item) {
-    return composeWriteQuery(insertSkipValidation(item, 'http://olaf.datipubblici.org/olaf/sameAs/agents-sardegna'));
+    return composeWriteQuery(insertSkipValidation(item, 'http://olaf.datipubblici.org/olaf/sameAs/Sardegna/Agents'));
 }
 
 // Query composer
