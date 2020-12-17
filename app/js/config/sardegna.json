@@ -1,0 +1,84 @@
+{
+  "limit" : 1,
+  "selection": "right",
+  "matching": "toggle",
+  "interlinking": true,
+  "fields": {
+    "uri": {
+      "input": "person",
+      "wikidata": "id"
+    },
+    "name": {
+      "input": "agentNames",
+      "wikidata": "author"
+    },
+    "dates": {
+      "input": "agentDates",
+      "wikidata": null
+    },
+    "workStartingDates": {
+      "input": null,
+      "wikidata": "workStartingDates"
+    },
+    "workEndingDates": {
+      "input": null,
+      "wikidata": "workEndingDates"
+    },
+    "titles": {
+      "input": "producedThings",
+      "wikidata": "works"
+    },
+    "titlesCount": {
+      "input": "producedThingsCount",
+      "wikidata": "worksCount"
+    },
+    "roles": {
+      "input": "agentRoles",
+      "wikidata": "occupations"
+    },
+    "image": {
+      "input": null,
+      "wikidata": "immagine"
+    },
+    "wikidata": {
+      "input": null,
+      "wikidata": "id"
+    },
+    "wikipediaIt": {
+      "input": null,
+      "wikidata": "itwikipedia"
+    },
+    "viaf": {
+      "input": null,
+      "wikidata": "viafurl"
+    },
+    "treccani": {
+      "input": null,
+      "wikidata": "treccani"
+    },
+    "ulan": {
+      "input": null,
+      "wikidata": "ULAN"
+    },
+    "wikimediaCommons": {
+      "input": null,
+      "wikidata": "commonsCategory"
+    },
+    "materials": {
+      "input": "materialsAndTechniques",
+      "wikidata": null
+    },
+    "description": {
+      "input": "description",
+      "wikidata": "description"
+    },
+    "birthDate": {
+      "input": null,
+      "wikidata": "birthDate"
+    },
+    "deathDate": {
+      "input": null,
+      "wikidata": "deathDate"
+    }
+  }
+}
