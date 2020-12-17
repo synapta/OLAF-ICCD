@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="/css/lib/semantic242.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js"></script>
+    <script src="https://kit.fontawesome.com/be7822736c.js"></script>
+    <script src="/js/lib/semantic242.js"></script>
+    <!-- Frontend rendering -->
+    <script type="text/javascript" src="/js/utils/url.js"></script>
+    <script type="text/javascript" src="/js/author/static.js"></script>
+    <script type="text/javascript" src="/js/author/rendering/static.js"></script>
+    <script type="text/javascript" src="/js/login/rendering/static.js"></script>
+    <script type="text/javascript" src="/js/login/static.js"></script>
+</head>
+<body>
+
+    <div class="ui top fixed menu navbar"></div>
+
+    <div class="ui container max-width">
+        <div class="password-container">
+
+            <h2 class="ui dividing header">Accedi a OLAF</h2>
+            <form id="login-form" class="ui form" action="/api/v1/arco/login" method="post">
+
+                <div id="login-error" class="ui error message">
+                    <div class="header"></div>
+                </div>
+
+                <div class="two fields">
+                    <div class="field">
+                        <label>Indirizzo e-mail</label>
+                        <input type="text" name="email" placeholder="Inserisci il tuo indirizzo e-mail">
+                    </div>
+                    <div class="field">
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="Inserisci qui la password scelta">
+                    </div>
+                </div>
+
+                <button class="ui button" type="submit">Submit</button>
+                <span>
+                    <a href="./reset-password">Hai dimenticato la password?</a>
+                </span>
+
+            </form>
+
+            <h2 class="ui dividing header">Registrazione</h2>
+            <form id="signup-form" class="ui form" action="/api/v1/arco/signup" method="post">
+
+                <div class="field">
+                    <label>Indirizzo e-mail</label>
+                    <input type="text" name="email" placeholder="Inserisci il tuo indirizzo e-mail">
+                </div>
+
+                <div class="two fields">
+                    <div class="field">
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="Inserisci qui la password scelta">
+                    </div>
+                    <div class="field">
+                        <label>Ripeti password</label>
+                        <input type="password" name="retype-password" placeholder="Ripeti password">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Scegli il tuo username">
+                </div>
+
+                <button class="ui button" type="submit">Submit</button>
+                <div class="ui error message"></div>
+
+            </form>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<table id="navbar-table">
+    <tr>
+        <td id="navbar-fixed-left" class="navbar-fixed-column">
+            {{#button}}
+            <div onclick="renderModal()" class="ui vertical animated button" tabindex="0">
+                <div class="hidden content">Info</div>
+                <div class="visible content">
+                    <i class="info icon"></i>
+                </div>
+            </div>
+            {{/button}}
+            {{#button}}
+            <a href="/api/v1/logout">
+                <div class="fluid ui button">Logout</div>
+            </a>
+            {{/button}}
+        </td>
+        <td>
+            <h3 class="ui header">
+                <i class="fas fa-book-reader" style="font-size: larger; margin-right: 10px;" aria-hidden="true"></i>
+                Open Linked Authority Files
+                <span >on <span style="text-transform: uppercase" id="user-token"></span></span>
+            </h3>
+        </td>
+        <td class="navbar-fixed-column">
+            {{#button}}
+            <div onclick="authorSkip()" data-identifier="" id="skip-author" class="fluid ui button">Salta opera</div>
+            {{/button}}
+        </td>
+    </tr>
+</table>

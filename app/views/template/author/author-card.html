@@ -1,0 +1,92 @@
+<div class="column">
+    <div class="ui raised segment">
+        <div id="author-fields">
+
+            <a class="ui blue ribbon label"> <i class="fas fa-user"></i> Autore</a>
+
+            <p class="author-name">
+                <a target="_blank" href="{{uri}}">
+                    <i id="author-link" class="fas fa-external-link-alt"></i> {{rawName}}
+                </a>
+            </p>
+
+            {{#description}}
+                <p id="author-description" class="card-box">
+                    {{.}}
+                </p>
+            {{/description}}
+
+            {{#type}}
+                <a class="ui blue ribbon label"> <i class="fas fa-book"></i> Categoria</a>
+                <p class="card-box">
+                    {{type}}, {{gender}}
+                </p>
+            {{/type}}
+
+            {{#dates.length}}
+                <a class="ui blue ribbon label"> <i class="fas fa-book"></i> Date autore</a>
+                <ul class="ui bulleted list card-box">
+                    {{#dates}}
+                        <li>
+                            <div class="item title">{{.}}</div>
+                        </li>
+                    {{/dates}}
+                </ul>
+            {{/dates.length}}
+
+            {{#birthDate}}
+                <a class="ui blue ribbon label"> <i class="fas fa-star"></i> Data di nascita</a>
+                <p class="card-box">
+                    {{birthDate}}, {{birthPlace}}
+                </p>
+            {{/birthDate}}
+
+            {{#deathDate}}
+                <a class="ui blue ribbon label"> <i class="fas fa-cross"></i> Data di morte</a>
+                <p class="card-box">
+                    {{deathDate}}, {{deathPlace}}
+                </p>
+            {{/deathDate}}
+
+            {{#yearFirstBook}}
+                <a class="ui blue ribbon label"> <i class="fas fa-book"></i> Intervallo Date Opere</a>
+                <p class="card-box">
+                    dal {{yearFirstBook}} al {{yearLastBook}}
+                </p>
+            {{/yearFirstBook}}
+
+            {{#titles.length}}
+                <a href="{{uri}}" target="_blank" class="ui blue ribbon label"> <i class="fas fa-book"></i> Opere ({{titlesCount}}) - Visualizza tutte</a>
+                <ul class="ui bulleted list card-box">
+                    {{#titles}}
+                    <li>
+                        <div class="item title">{{.}}</div>
+                    </li>
+                    {{/titles}}
+                </ul>
+            {{/titles.length}}
+
+            {{#materials.length}}
+                <a target="_blank" class="ui blue ribbon label"> <i class="fas fa-book"></i> Tecniche e materiali</a>
+                <ul class="ui bulleted list card-box">
+                    {{#materials}}
+                    <li>
+                        <div class="item title">{{.}}</div>
+                    </li>
+                    {{/materials}}
+                </ul>
+            {{/materials.length}}
+
+            {{#roles.length}}
+                <a class="ui blue ribbon label"> <i class="fas fa-briefcase"></i> Ruoli</a>
+                <div class="ui bulleted list card-box">
+                    {{#roles}}
+                        <div class="item">{{.}}</div>
+                    {{/roles}}
+                </div>
+            {{/roles.length}}
+
+        </div>
+
+    </div>
+</div>

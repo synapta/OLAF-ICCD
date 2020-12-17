@@ -1,0 +1,67 @@
+<div class="column">
+    <div class="ui raised segment">
+        <div id="author-fields">
+
+            <a class="ui blue ribbon label"> <i class="fas fa-book"></i> Dettagli opera</a>
+
+            <p class="author-name">
+                <a target="_blank" href="{{uri}}">
+                    <i id="author-link" class="fas fa-external-link-alt"></i> {{rawName}}
+                </a>
+            </p>
+
+            {{#image}}
+                <a href="{{.}}" target="_blank">
+                    <div style="background-image: url({{.}});" class="author-image"></div>
+                </a>
+            {{/image}}
+
+            {{#subject}}<p><b>Soggetto:</b> {{subject}}</p>{{/subject}}
+            {{#description}}<p><b>Descrizione:</b> {{description}}</p>{{/description}}
+            {{#type}}<p><b>Tipologia:</b> {{type}}</p>{{/type}}
+
+            <a class="ui blue ribbon label"> <i class="fas fa-calendar"></i> Date relative all'opera</a>
+            <p class="card-box">Date inizio</p>
+            <div class="ui bulleted list">
+                {{#startingDates}}
+                    <div class="item">{{.}}</div>
+                {{/startingDates}}
+            </div>
+            <p class="card-box">Date fine</p>
+            <div class="ui bulleted list">
+                {{#endingDates}}
+                <div class="item">{{.}}</div>
+                {{/endingDates}}
+            </div>
+
+            {{#contributors.length}}
+            <a class="ui blue ribbon label"> <i class="fas fa-user"></i> Autori</a>
+            <ul class="ui bulleted list card-box">
+                {{#contributors}}
+                <li>
+                    <div class="item title">{{.}}</div>
+                </li>
+                {{/contributors}}
+            </ul>
+            {{/contributors.length}}
+
+            {{#material.length}}
+            <a class="ui blue ribbon label"> <i class="fas fa-wrench"></i> Materiali opera</a>
+            <ul class="ui bulleted list card-box">
+                {{#material}}
+                <li>
+                    <div class="item title">{{.}}</div>
+                </li>
+                {{/material}}
+            </ul>
+            {{/material.length}}
+
+            {{#place}}
+            <a class="ui blue ribbon label"> <i class="fas fa-map-marker-alt"></i> Luoghi opera</a>
+            <p class="card-box">{{place}}</p>
+            {{/place}}
+
+        </div>
+
+    </div>
+</div>

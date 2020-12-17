@@ -1,0 +1,106 @@
+<div class="ui two column grid">
+    {{#options}}
+    <div class="column">
+        <div data-item="{{string}}"
+             data-hash="{{hash}}"
+             class="ui raised segment author-option">
+            {{#suggested}}
+                <a class="ui blue ribbon label">Autore consigliato</a>
+            {{/suggested}}
+            {{#matches}}
+                <a class="ui blue ribbon label">Selezionato da {{.}} utenti</a>
+            {{/matches}}
+            <div class="author-name">
+                <div class="author-title">{{name}}</div>
+                <div class="author-subtitle">
+                    <span>{{type}}{{#gender}}, {{.}}{{/gender}}</span>
+                </div>
+            </div>
+            <a class="ui red ribbon label">Candidato</a>
+            <div class="ui items">
+                <div class="item">
+                    <div class="ui small image">
+                        <div style="background-image: url({{#image}}{{.}}{{/image}});" class="author-image">
+                            {{^image}}<i class="fas fa-user"></i>{{/image}}
+                        </div>
+                    </div>
+                    <div class="middle aligned content">
+                        {{#description}}<p>{{.}}</p>{{/description}}
+                        {{#positionHeld}}<p><b>Occupazione:</b> {{.}}</p>{{/positionHeld}}
+                        {{#birthDate}}<p><b>Data di nascita:</b> {{.}}{{#birthPlace}}, {{.}}{{/birthPlace}}</p>{{/birthDate}}
+                        {{#deathDate}}<p><b>Data di morte: </b> {{.}}{{#deathPlace}}, {{.}}{{/deathPlace}}</p>{{/deathDate}}
+                        {{^description}}
+                            {{^birthDate}}
+                                {{^deathDate}}
+                                    <i>Non sono presenti informazioni aggiuntive riguardo questo elemento</i>
+                                {{/deathDate}}
+                            {{/birthDate}}
+                        {{/description}}
+                    </div>
+                </div>
+            </div>
+            {{#titles.length}}
+                <a class="ui red ribbon label">Opere dell'autore</a>
+                <div class="ui items">
+                    <div class="ui accordion">
+                        <div class="active title">
+                            <i class="dropdown icon"></i>
+                            Visualizza opere {{titlesSource}}
+                        </div>
+                        <div class="active content">
+                            <ul class="ui bulleted list card-box">
+                                {{#titles}}
+                                    <li>
+                                        <div class="item">{{.}}</div>
+                                    </li>
+                                {{/titles}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {{/titles.length}}
+            {{#roles.length}}
+            <a class="ui red ribbon label">Professione o impiego dell'autore</a>
+            <div class="ui items">
+                <div class="ui accordion">
+                    <div class="active title">
+                        <i class="dropdown icon"></i>
+                        Visualizza impieghi {{titlesSource}}
+                    </div>
+                    <div class="active content">
+                        <ul class="ui bulleted list card-box">
+                            {{#roles}}
+                            <li>
+                                <div class="item">{{.}}</div>
+                            </li>
+                            {{/roles}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {{/roles.length}}
+            <a class="ui red ribbon label">Esplora in...</a>
+            <div class="center aligned card-box">
+                {{#wikidata}}<a href="{{.}}" target="_blank" class="ui center aligned label basic">Fonte: Wikidata</a>{{/wikidata}}
+                {{#viaf}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">VIAF</a>{{/viaf}}
+                {{#wikipedia}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">Wikipedia IT</a>{{/wikipedia}}
+                {{#wikimediaCommons}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">Wikimedia Commons</a>{{/wikimediaCommons}}
+                {{#isni}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">ISNI</a>{{/isni}}
+                {{#wikipediaIt}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">Wikipedia</a>{{/wikipediaIt}}
+                {{#treccani}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">Treccani</a>{{/treccani}}
+                {{#sbn}}<a class="ui center aligned blue label" href="https://opac.sbn.it/opacsbn/opac/iccu/scheda_authority.jsp?bid={{.}}" target="_blank">SBN</a>{{/sbn}}
+                {{#ch}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">Catholic Hierarchy</a>{{/ch}}
+                {{#dbpedia}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">Dbpedia</a>{{/dbpedia}}
+                {{#lcnaf}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">LCNAF</a>{{/lcnaf}}
+                {{#gnd}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">GND</a>{{/gnd}}
+                {{#bnf}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">BNF</a>{{/bnf}}
+                {{#ulan}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">ULAN</a>{{/ulan}}
+                {{#bav}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">BAV</a>{{/bav}}
+                {{#cerl}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">CERL</a>{{/cerl}}
+            </div>
+            <div class="ui divider"></div>
+            <button onclick="authorSelect(this)" class="ui fluid green button author-selection">Seleziona candidato</button>
+        </div>
+    </div>
+    {{/options}}
+</div>

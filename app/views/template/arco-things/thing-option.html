@@ -1,0 +1,98 @@
+<div class="ui two column grid">
+    {{#options}}
+    <div class="column">
+        <div data-item="{{string}}"
+             data-hash="{{hash}}"
+             class="ui raised segment author-option">
+            {{#suggested}}
+            <a class="ui blue ribbon label">Autore consigliato</a>
+            {{/suggested}}
+            {{#matches}}
+            <a class="ui blue ribbon label">Selezionato da {{.}} utenti</a>
+            {{/matches}}
+            <div class="author-name">
+                <div class="author-title">{{name}}</div>
+                <div class="author-subtitle">
+                    <span>{{type}}</span>
+                </div>
+            </div>
+            <a class="ui red ribbon label">Candidato</a>
+            <div class="ui items">
+                <div class="item">
+                    <div class="ui small image">
+                        <div style="background-image: url({{#image}}{{.}}{{/image}});" class="author-image">
+                            {{^image}}<i class="fas fa-user"></i>{{/image}}
+                        </div>
+                    </div>
+                    <div class="middle aligned content">
+                        {{#description}}<p>{{.}}</p>{{/description}}
+                        {{#startingDates}}<p><b>Data inizio:</b> {{.}}</p>{{/startingDates}}
+                        {{#endingDates}}<p><b>Data fine: </b> {{.}}</p>{{/endingDates}}
+                        {{#place}}<p><b>Luogo conservazione: </b> {{.}}</p>{{/place}}
+                        {{^description}}
+                        {{^birthDate}}
+                        {{^deathDate}}
+                        {{^place}}
+                        <i>Non sono presenti informazioni aggiuntive riguardo questo elemento</i>
+                        {{/place}}
+                        {{/deathDate}}
+                        {{/birthDate}}
+                        {{/description}}
+                    </div>
+                </div>
+            </div>
+            {{#contributors.length}}
+            <a class="ui red ribbon label">Autori</a>
+            <div class="ui items">
+                <div class="ui accordion">
+                    <div class="active title">
+                        <i class="dropdown icon"></i>
+                        Visualizza tutti gli autori
+                    </div>
+                    <div class="active content">
+                        <ul class="ui bulleted list card-box">
+                            {{#contributors}}
+                            <li>
+                                <div class="item">{{.}}</div>
+                            </li>
+                            {{/contributors}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {{/contributors.length}}
+            {{#material.length}}
+            <a class="ui red ribbon label">Materiali e metodi di produzione</a>
+            <div class="ui items">
+                <div class="ui accordion">
+                    <div class="active title">
+                        <i class="dropdown icon"></i>
+                        Visualizza materiali
+                    </div>
+                    <div class="active content">
+                        <ul class="ui bulleted list card-box">
+                            {{#material}}
+                            <li>
+                                <div class="item">{{.}}</div>
+                            </li>
+                            {{/material}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {{/material.length}}
+            <a class="ui red ribbon label">Esplora in...</a>
+            <div class="center aligned card-box">
+                {{#wikidata}}<a href="{{.}}" target="_blank" class="ui center aligned label basic">Fonte: Wikidata</a>{{/wikidata}}
+                {{#viaf}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">VIAF</a>{{/viaf}}
+                {{#wikipedia}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">Wikipedia IT</a>{{/wikipedia}}
+                {{#wikimediaCommons}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">Wikimedia Commons</a>{{/wikimediaCommons}}
+                {{#treccani}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">Treccani</a>{{/treccani}}
+                {{#ulan}}<a class="ui center aligned blue label" href="{{.}}" target="_blank">ULAN</a>{{/ulan}}
+            </div>
+            <div class="ui divider"></div>
+            <button onclick="authorSelect(this)" class="ui fluid green button author-selection">Seleziona candidato</button>
+        </div>
+    </div>
+    {{/options}}
+</div>

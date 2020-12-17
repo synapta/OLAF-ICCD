@@ -1,0 +1,74 @@
+{
+  "limit" : 1,
+  "selection": "right",
+  "matching": "toggle",
+  "interlinking": true,
+  "fields": {
+    "uri": {
+      "input": "thing",
+      "wikidata": "id"
+    },
+    "name": {
+      "input": "thingName",
+      "wikidata": "thing"
+    },
+    "type": {
+      "input": "types",
+      "wikidata": "classLabel"
+    },
+    "material": {
+      "input": "materials",
+      "wikidata": "materials"
+    },
+    "description": {
+      "input": "description",
+      "wikidata": "description"
+    },
+    "class": {
+      "input": "classes"
+    },
+    "contributors": {
+      "input": "contributorNames",
+      "wikidata": "agents"
+    },
+    "place": {
+      "input": "place",
+      "wikidata": "locations"
+    },
+    "startingDates": {
+      "input": "startingDates",
+      "wikidata": "thingStartingDates"
+    },
+    "endingDates": {
+      "input": "endingDates",
+      "wikidata": "thingEndingDates"
+    },
+    "roles": {
+      "input": "agentRoles"
+    },
+    "wikidata": {
+      "input": null,
+      "wikidata": "id"
+    },
+    "wikipediaIt": {
+      "input": null,
+      "wikidata": "itwikipedia"
+    },
+    "image": {
+      "input": "image",
+      "wikidata": "immagine"
+    },
+    "treccani": {
+      "input": null,
+      "wikidata": "treccani"
+    },
+    "ulan": {
+      "input": null,
+      "wikidata": "ULAN"
+    },
+    "wikimediaCommons": {
+      "input": null,
+      "wikidata": "commonsCategory"
+    }
+  }
+}

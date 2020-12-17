@@ -1,0 +1,58 @@
+{{#options}}
+    <div class="ui raised segment">
+
+        <div class="ui items">
+            <div class="item">
+                <div class="ui small image">
+                    <div class="author-image" style="background-image: url({{#image}}{{.}}{{/image}});">
+                        {{^image}}<i class="fas fa-user"></i>{{/image}}
+                    </div>
+                </div>
+                <div class="middle aligned content">
+                    <div class="author-name">
+                        <div class="author-title">{{name}}</div>
+                        <div class="author-subtitle">{{type}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui divider"></div>
+
+        {{#wikidata.length}}
+            <p class="card-box"><b>Wikidata</b></p>
+            {{#wikidata}}
+                <div class="add_match">
+                    <div data-field="wikidata" data-value="{{.}}" onclick="matchField('wikidata', '{{.}}')" class="ui compact icon button field_selection">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <span>{{.}}</span>
+                </div>
+            {{/wikidata}}
+        {{/wikidata.length}}
+
+        {{#viaf.length}}
+            <p class="card-box"><b>VIAF</b></p>
+            {{#viaf}}
+                <div class="add_match">
+                    <div data-field="viaf" data-value="{{.}}" onclick="matchField('viaf', '{{.}}')" class="ui compact icon button field_selection">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <span>{{.}}</span>
+                </div>
+            {{/viaf}}
+        {{/viaf.length}}
+
+        {{#sbn.length}}
+            <p class="card-box"><b>SBN</b></p>
+            {{#sbn}}
+                <div class="add_match">
+                    <div data-field="sbn" data-value="{{.}}" onclick="matchField('sbn', '{{.}}')" class="ui compact icon button field_selection">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <span>{{.}}</span>
+                </div>
+            {{/sbn}}
+        {{/sbn.length}}
+
+    </div>
+{{/options}}

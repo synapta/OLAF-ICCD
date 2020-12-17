@@ -1,0 +1,23 @@
+{{#selectedFields}}
+    {{#values.length}}
+        <div class="ui raised segment selection-segment">
+            <div class="ui bottom left attached label">{{label}}</div>
+            <div>
+                {{#values}}
+                <div class="ui fluid input">
+                    <input type="text" name="{{field}}" placeholder="{{label}}" value="{{.}}" />
+                </div>
+                {{/values}}
+            </div>
+        </div>
+    {{/values.length}}
+{{/selectedFields}}
+<div class="ui icon message">
+    <i class="fas fa-arrow-left"></i>
+    <div class="content">
+        <div class="header">
+            Invia i dati
+        </div>
+        <p>Conferma l'importazione dei dati selezionati e rendi effettive le modifiche al catalogo.</p>
+    </div>
+</div>

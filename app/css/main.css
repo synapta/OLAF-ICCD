@@ -1,0 +1,415 @@
+/* Generali */
+
+.container
+{
+    width: 100% !important;
+    min-height: 100vh !important;
+    padding: 40px !important;
+    padding-top: 90px !important;
+}
+
+.password-container {
+    padding: 0 calc((100% - 60em)/2);
+}
+
+.navbar
+{
+    display: block !important;
+    min-height: 65px;
+    text-align: center;
+}
+
+.navbar .header
+{
+    width: 100%;
+    line-height: 65px;
+}
+
+#navbar-table {
+    width:100%;
+    height: 65px;
+    padding: 0 3%;
+    display: table;
+}
+
+.navbar-fixed-column {
+    width: 300px;
+}
+
+#navbar-fixed-left .button {
+    width: 48% !important;
+    margin: 0 1%;
+    float: left;
+}
+
+.navbar-fixed-column #send-button {
+    margin: 0 !important;
+}
+
+.header span {
+    color: #aaa;
+}
+
+.card-box
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+ul.card-box
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 0px !important;
+    padding-left: 20px;
+    max-height: 100px;
+    overflow-y: scroll;
+}
+
+ul.card-box > li
+{
+    padding-left: 20px !important;
+}
+
+/* Author card */
+
+.author-name
+{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+#author-description {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.author-name a
+{
+    color: inherit;
+}
+
+#author-link
+{
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.author-option .label
+{
+    margin: 2.5px 0 !important;
+}
+
+#send-button
+{
+    margin-bottom: 10px;
+}
+
+.ribbon .fas
+{
+    margin-right: 5px;
+}
+
+.title
+{
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Loader */
+
+#loader
+{
+    position: absolute;
+    width: 100%;
+    height: calc(100vh - 65px);
+    left: 0;
+    top: 65px;
+    background-color: #FFFFFF;
+    z-index: 10;
+    padding-top: calc(50vh - 90px);
+}
+
+/* Author options */
+
+.author-image
+{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background-size: cover;
+    margin: 0 auto;
+    background-color: #ccc;
+    text-align: center;
+    line-height: 100px;
+    font-size: 40px;
+}
+
+.author-title
+{
+    margin-bottom: 5px;
+}
+
+.author-subtitle
+{
+    font-size: 16px;
+    color: #aaa;
+}
+
+/* Matches options */
+
+.add_match
+{
+    margin-bottom: 10px;
+}
+
+.add_match span {
+    position: relative;
+    top: -14px;
+}
+
+/* Matches selection */
+
+.fa-arrow-left, .fa-arrow-right, .fa-spinner
+{
+    font-size: 45px;
+    margin-right: 15px;
+}
+
+.fa-spinner
+{
+    -webkit-animation: rotation 2s infinite linear !important;
+    animation: rotation 2s infinite linear !important;
+}
+
+.selection-segment {
+    margin-bottom: 10px;
+}
+
+.selection-segment input {
+    margin: 5px 0 !important;
+}
+
+/* Beweb selection */
+
+#header-table-divider {
+    margin: 0 !important;
+}
+
+#header-table {
+    padding: 0 40px;
+    margin-top: 0 !important;
+}
+
+.header-card {
+    width: calc(100% - 15px) !important;
+}
+
+.header-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-size: cover;
+    background-color: #E8E8E8
+}
+
+.selection-input {
+    margin-bottom: 10px;
+}
+
+.field_selection {
+    margin: 2.5px !important;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: calc(100% - 30px);
+}
+
+.selection-input-wrapper {
+    width: calc(100% - 35px);
+}
+
+.label-wrapper{
+    display: inline;
+}
+
+.wrapper_link {
+    position: relative;
+    top: -10px;
+}
+
+.selection-row {
+    transition: background-color 500ms;
+}
+
+.selection-row .fa-check {
+    color: #21BA45;
+}
+
+.title h2 {
+    display: inline;
+}
+
+/* Messages */
+
+.message .fas {
+    font-size: 35px;
+    margin-right: 15px;
+}
+
+/* Footer */
+
+/* FOOTER */
+.footer-container {
+    padding: 1.5rem 5rem;
+    box-shadow: 0px 2px 4px 0px rgba(34, 36, 38, 0.12), 0px 2px 10px 0px rgba(34, 36, 38, 0.15);
+    border-top: 1px solid rgba(34, 36, 38, 0.15)
+}
+
+.footer-section-1 {
+    padding: 4rem 5rem 3rem;
+    background-color: #eee;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#footer-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#footer-menu a {
+    color: var(--light-g);
+    font-size: 13px !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0 15px;
+    cursor: pointer;
+    transition: all .5s;
+}
+
+.cc-container {
+    text-align: center;
+    max-width: 600px;
+    margin: 2rem auto 0;
+    color: var(--light-g);
+}
+
+.footer-section-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: .8rem;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+#footer-logo {
+    position: absolute;
+    left: 5rem;
+}
+
+#footer-logo img {
+    height: 100px;
+    vertical-align: baseline;
+}
+
+.footer-section-2 .block-2 > a {
+    font-size: 1rem;
+    color: var(--dark-g);
+    border-bottom: 1px solid;
+    margin-left: 6px;
+    transition: all .5s;
+}
+
+.footer-section-2 .block-2 > a:hover {
+    text-decoration: none;
+    opacity: .5;
+}
+
+#footer-synapta-logo {
+    height: 20px;
+    margin-left: 10px;
+    vertical-align: bottom;
+}
+
+#piemonte-logo {
+    height: 28px;
+    margin: 0 10px;
+}
+
+.scarta-icon-button {
+    /* width: 10em; */
+}
+
+.differenze-column {
+    width: 40em;
+}
+
+.max-width {
+    max-width: 60em!important;
+}
+
+/* VERY SMALL SCREENS AND LARGE TABLETS */
+@media screen and (max-width: 991px) {
+    .footer-section-1 {
+        flex-direction: column;
+        padding: 2rem 3rem;
+    }
+
+    #footer-logo {
+        position: relative;
+        left: 0;
+    }
+
+    #footer-menu {
+        margin-top: 2rem;
+    }
+}
+
+/* SMARTPHONES (portait) */
+@media screen and (max-width: 576px) {
+    /* FOOTER */
+    .footer-container {
+        padding: 1.5rem;
+    }
+
+    #footer-menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #footer-menu li {
+        margin: .9rem 0;
+    }
+
+    #footer-menu a {
+        font-size: 1.2rem !important;
+    }
+
+    .footer-section-1 {
+        padding: 3rem 1.5rem;
+    }
+
+    .footer-section-2 {
+        flex-direction: column;
+    }
+
+    .footer-section-2 > div {
+        margin: 1rem 0;
+    }
+}
