@@ -18,7 +18,7 @@ let enrichments      = null;
 function validateToken(token) {
 
     // Get valid tokens
-    let validTokens = ['arco', 'arco-things'];
+    let validTokens = ['arco', 'arco-things', 'sardegna'];
 
     // Check if token is valid
     return validTokens.includes(token);
@@ -163,7 +163,7 @@ messages.messageOpereValidazione = `
 function loginToken(token) {
 
     // Get tokens that need login
-    let loginTokens = ['arco', 'arco-things'];
+    let loginTokens = ['arco', 'arco-things', 'sardegna'];
 
     // Check if current token need login
     return loginTokens.includes(token);
@@ -297,7 +297,7 @@ module.exports = function(app, passport = null, driver = null) {
     app.get('/get/:token/modal-text', (request, response) => {
 
         let messageName = "message";
-        if (request.params.token === 'arco' ) {
+        if (request.params.token === 'arco' || request.params.token === 'sardegna' ) {
             messageName += 'Autori';
         } else {
             messageName += 'Opere';
@@ -506,7 +506,7 @@ module.exports = function(app, passport = null, driver = null) {
 
         // Compose query
         let requests = queries.authorSkip(request, driver);
-        if(!(configToken === 'arco' ||  configToken === 'arco-things'))
+        if(!(configToken === 'arco' ||  configToken === 'arco-things' ||  configToken === 'sardegna'))
             requests = requests.map(req => promiseRequest(req));
 
         // Send requests
