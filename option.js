@@ -138,7 +138,8 @@ class Option {
         if(this.getViafId()) {
             await requests({
                 url: 'https://www.viaf.org/viaf/' + this.getViafId() + '/?httpAccept=application/json',
-                headers: {'User-Agent': 'topolino'}
+                headers: {'User-Agent': 'topolino'},
+                proxy: 'http://10.138.181.7:3128/'
             }).then((response) => {
 
                 // Store response as JSON

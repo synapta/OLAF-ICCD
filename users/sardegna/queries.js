@@ -20,7 +20,7 @@ let authorSearch = (name) => {
             srsearch: (name.split(/[(-]/)[0]).trim(),
             format: "json"
         },
-        //proxy: 'http://10.138.181.7:3128/',
+        proxy: 'http://10.138.181.7:3128/',
         json: true
     }
 
@@ -454,7 +454,7 @@ function composeQuery(query) {
             query: query,
             format: 'json'
         },
-        //proxy: 'http://10.138.181.7:3128/',
+        proxy: 'http://10.138.181.7:3128/',
         method: 'POST',
         headers: {
             'Content-Type' : 'application/x-www-form-urlencoded'
@@ -476,7 +476,7 @@ function composeQueryWikidata(query){
     // Compose query
     return {
         method: 'POST',
-        //proxy: 'http://10.138.181.7:3128/',
+        proxy: 'http://10.138.181.7:3128/',
         url: 'https://query.wikidata.org/sparql',
         body: 'query=' + encodeURIComponent(query),
         headers: {
