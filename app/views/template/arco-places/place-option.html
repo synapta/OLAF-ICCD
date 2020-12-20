@@ -1,0 +1,45 @@
+<div class="ui two column grid">
+    {{#options}}
+    <div class="column">
+        <div data-item="{{string}}"
+             data-hash="{{hash}}"
+             class="ui raised segment author-option">
+            {{#suggested}}
+            <a class="ui blue ribbon label">Autore consigliato</a>
+            {{/suggested}}
+            {{#matches}}
+            <a class="ui blue ribbon label">Selezionato da {{.}} utenti</a>
+            {{/matches}}
+            <div class="author-name">
+                <div class="author-title">{{name}}</div>
+                <div class="author-subtitle">
+                    <span>{{type}}</span>
+                </div>
+            </div>
+            <a class="ui red ribbon label">Candidato</a>
+            <div class="ui items">
+                <div class="item">
+                    <div class="ui small image">
+                        <div style="background-image: url({{#image}}{{.}}{{/image}});" class="author-image">
+                            {{^image}}<i class="fas fa-user"></i>{{/image}}
+                        </div>
+                    </div>
+                    <div class="middle aligned content">
+                        {{#indirizzo}}<p><b>Indirizzo:</b> {{indirizzo}}</p>{{/indirizzo}}
+                        {{#comune}}<p><b>Comune:</b> {{comune}}</p>{{/comune}}
+                        {{#provincia}}<p><b>Provincia:</b> {{provincia}}</p>{{/provincia}}
+                        {{#regione}}<p><b>Regione:</b> {{regione}}</p>{{/regione}}
+                    </div>
+                </div>
+            </div>
+            
+            {{#description}}
+            <a class="ui red ribbon label">Descrizione</a>
+            <p>{{{description}}}</p>
+            {{/description}}
+            <div class="ui divider"></div>
+            <button onclick="authorSelect(this)" class="ui fluid green button author-selection">Seleziona candidato</button>
+        </div>
+    </div>
+    {{/options}}
+</div>

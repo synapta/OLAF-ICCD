@@ -44,6 +44,7 @@
     "require": "^2.4.20",
     "semantic-ui-grid": "^2.4.1",
     "sentry": "^0.1.2",
+    "string-similarity": "^4.0.3",
     "sugar": "latest",
     "underscore": "^1.9.1"
   }

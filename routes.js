@@ -18,7 +18,7 @@ let enrichments      = null;
 function validateToken(token) {
 
     // Get valid tokens
-    let validTokens = ['arco', 'arco-things', 'sardegna'];
+    let validTokens = ['arco', 'arco-things', 'sardegna', 'sardegna-luoghi'];
 
     // Check if token is valid
     return validTokens.includes(token);
@@ -163,7 +163,7 @@ messages.messageOpereValidazione = `
 function loginToken(token) {
 
     // Get tokens that need login
-    let loginTokens = ['arco', 'arco-things', 'sardegna'];
+    let loginTokens = ['arco', 'arco-things', 'sardegna', 'sardegna-luoghi'];
 
     // Check if current token need login
     return loginTokens.includes(token);
@@ -271,7 +271,7 @@ module.exports = function(app, passport = null, driver = null) {
     });
 
     /* Serve app frontend */
-    app.get(['/get/:token/author/', '/get/:token/authorityfile/', '/get/:token/author/:authorId', '/get/:token/authorityfile/:authorId',  '/get/:token/work/', '/get/:token/work/:authorId'], (request, response) => {
+    app.get(['/get/:token/author/', '/get/:token/authorityfile/', '/get/:token/author/:authorId', '/get/:token/authorityfile/:authorId',  '/get/:token/work/', '/get/:token/work/:authorId', '/get/:token/place/', '/get/:token/place/:authorId'], (request, response) => {
         response.sendFile('author.html', {root: __dirname + '/app/views'});
     });
 
@@ -299,8 +299,10 @@ module.exports = function(app, passport = null, driver = null) {
         let messageName = "message";
         if (request.params.token === 'arco' || request.params.token === 'sardegna' ) {
             messageName += 'Autori';
-        } else {
+        } else if (request.params.token === 'arco-things'  ) { 
             messageName += 'Opere';
+        } else {
+            messageName += 'Luoghi';
         }
 
         if (request.user.role === 'user'){
@@ -411,7 +413,7 @@ module.exports = function(app, passport = null, driver = null) {
         })
     });
 
-    app.get(['/api/v1/:token/author/', '/api/v1/:token/author/:authorId', '/api/v1/:token/work/', '/api/v1/:token/work/:authorId'], (request, response) => {
+    app.get(['/api/v1/:token/author/', '/api/v1/:token/author/:authorId', '/api/v1/:token/work/', '/api/v1/:token/work/:authorId', '/api/v1/:token/place/', '/api/v1/:token/place/:authorId'], (request, response) => {
         let cache = (request.query.cache !== 'false');
         let user = (!request.query.enrichment && request.user) ? request.user.username : null;
         let agent = request.params.authorId;
@@ -506,7 +508,7 @@ module.exports = function(app, passport = null, driver = null) {
 
         // Compose query
         let requests = queries.authorSkip(request, driver);
-        if(!(configToken === 'arco' ||  configToken === 'arco-things' ||  configToken === 'sardegna'))
+        if(!(configToken === 'arco' ||  configToken === 'arco-things' ||  configToken === 'sardegna' || configToken === 'sardegna-luoghi'  ))
             requests = requests.map(req => promiseRequest(req));
 
         // Send requests
