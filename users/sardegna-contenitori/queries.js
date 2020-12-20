@@ -43,7 +43,7 @@ where {
         ?site a cis:Site .
     }
     MINUS  {
-        graph <http://olaf.datipubblici.org/olaf/sameAs/Sardegna/Sites> {?site skos:closeMatch ?anothersite}
+        graph <http://olaf.datipubblici.org/olaf/sameAs/Sardegna/CulturalInstitutesOrSites> {?site skos:closeMatch ?anothersite}
       }
       OPTIONAL {
         GRAPH ?g {
@@ -76,7 +76,7 @@ select
     (SAMPLE(?sitelabel) as ?sitelabel ) 
     (SAMPLE(?addr) as ?addr ) 
     (SAMPLE(?prov) as ?prov ) 
-    (SAMPLE(?region) as ?regione ) 
+    (SAMPLE(?region) as ?regione) 
     (SAMPLE(?city) as ?city )
     (GROUP_CONCAT(DISTINCT(?thingName); separator="$$$") as ?thingsName ) 
 where {
@@ -124,8 +124,7 @@ let getICCDplaces = () => {
     (SAMPLE(?region) as ?regione) 
     (SAMPLE(?provincia) as ?provincia) 
     where {
-        graph <http://dati.beniculturali.it/mibact/luoghi> {
-            ?place a cis:CulturalInstituteOrSite .
+        graph <http://dati.beniculturali.it/iccd/CF> {
             ?place rdfs:label ?siteLabel  .
             OPTIONAL {?place dc:type ?tipo .}
             OPTIONAL { ?place l0:description ?desc .}
@@ -134,12 +133,12 @@ let getICCDplaces = () => {
             ?add clvapit:fullAddress ?addr.
             ?add clvapit:hasCity/rdfs:label ?comune .
             ?add clvapit:hasProvince/rdfs:label ?provincia .
-            ?add clvapit:hasRegion <http://dati.beniculturali.it/mibact/luoghi/resource/Region/Sardegna> .
+            ?add clvapit:hasRegion <http://dati.beniculturali.it/iccd/cf/resource/Region/Sardegna> .
             FILTER (lang(?siteLabel) = 'it')
             FILTER (lang(?desc) = 'it')
             OPTIONAL { ?place foaf:depiction ?image }
             BIND("Sardegna" as ?region)
-      }
+        }
     } 
     GROUP BY ?place`;
 
@@ -228,11 +227,11 @@ function authorSkip(request, driver) {
 }
 
 function storeMatching(item, target) {
-    return composeWriteQuery(insertMatchValidation(item, target, 'http://olaf.datipubblici.org/olaf/sameAs/Sardegna/Sites'));
+    return composeWriteQuery(insertMatchValidation(item, target, 'http://olaf.datipubblici.org/olaf/sameAs/Sardegna/CulturalInstitutesOrSites'));
 }
 
 function storeSkip(item) {
-    return composeWriteQuery(insertSkipValidation(item, 'http://olaf.datipubblici.org/olaf/sameAs/Sardegna/Sites'));
+    return composeWriteQuery(insertSkipValidation(item, 'http://olaf.datipubblici.org/olaf/sameAs/Sardegna/CulturalInstitutesOrSites'));
 }
 
 // Query composer

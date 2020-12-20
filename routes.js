@@ -18,7 +18,7 @@ let enrichments      = null;
 function validateToken(token) {
 
     // Get valid tokens
-    let validTokens = ['arco', 'arco-things', 'sardegna', 'sardegna-luoghi'];
+    let validTokens = ['arco', 'arco-things', 'sardegna', 'sardegna-luoghi', 'sardegna-contenitori'];
 
     // Check if token is valid
     return validTokens.includes(token);
@@ -163,7 +163,7 @@ messages.messageOpereValidazione = `
 function loginToken(token) {
 
     // Get tokens that need login
-    let loginTokens = ['arco', 'arco-things', 'sardegna', 'sardegna-luoghi'];
+    let loginTokens = ['arco', 'arco-things', 'sardegna', 'sardegna-luoghi','sardegna-contenitori'];
 
     // Check if current token need login
     return loginTokens.includes(token);
@@ -508,7 +508,7 @@ module.exports = function(app, passport = null, driver = null) {
 
         // Compose query
         let requests = queries.authorSkip(request, driver);
-        if(!(configToken === 'arco' ||  configToken === 'arco-things' ||  configToken === 'sardegna' || configToken === 'sardegna-luoghi'  ))
+        if(!(configToken === 'arco' ||  configToken === 'arco-things' ||  configToken === 'sardegna' || configToken === 'sardegna-luoghi' || configToken === 'sardegna-contenitori'   ))
             requests = requests.map(req => promiseRequest(req));
 
         // Send requests
