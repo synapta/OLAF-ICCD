@@ -55,7 +55,6 @@ function getAndlockAgent(driver, user, thing, lock, callback) {
                     {options: {$not: {$size: 0}, $ne: null}, enriched: true},
                     {enriched: false}
                 ],
-                lock: null,
                 "thing.rawName": { $not: { $in: [ /ambito/i, /bottega/i, /manifattura/i, /produzione/i]}},
                 validated: false,
                 matchedBy: {$nin: [user]},

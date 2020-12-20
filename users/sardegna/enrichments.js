@@ -54,7 +54,6 @@ function getAndlockAgent(driver, user, agent, lock, callback) {
                     {enriched: false}
                 ],
                 validated: false,
-                lock: null,
                 matchedBy: {$nin: [user]},
                 skippedBy: {$nin: [user]}
             }
