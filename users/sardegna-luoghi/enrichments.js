@@ -105,7 +105,7 @@ function storeMatching(driver, user, option, place) {
     // Upsert document and store matching
     return driver.collection('matches').updateOne(document, {$set: Object.assign(document, {timestamp: new Date()})}, {upsert: true}, (err, res) => {
         if(err) throw err;
-        driver.collection('places').updateOne({_id: place}, {$addToSet: {matchedBy: user.username}});
+        driver.collection('sardegna-luoghi').updateOne({_id: place}, {$addToSet: {matchedBy: user.username}});
     });
 
 }
@@ -118,7 +118,7 @@ function skipAgent(driver, user, place) {
     // Upsert document and store skip
     return driver.collection('skipped').updateOne(document, {$set: Object.assign(document, {timestamp: new Date()})}, {upsert: true}, (err, res) => {
         if(err) throw err;
-        driver.collection('places').updateOne({_id: place}, {$addToSet: {skippedBy: user.username}});
+        driver.collection('sardegna-luoghi').updateOne({_id: place}, {$addToSet: {skippedBy: user.username}});
     });
 
 }
