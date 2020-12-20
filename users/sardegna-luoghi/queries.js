@@ -240,7 +240,7 @@ function composeQuery(query) {
             query: query,
             format: 'json'
         },
-        //proxy: 'http://10.138.181.7:3128/',
+        proxy: 'http://10.138.181.7:3128/',
         method: 'POST',
         headers: {
             'Content-Type' : 'application/x-www-form-urlencoded'
