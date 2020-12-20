@@ -211,7 +211,7 @@ function authorLink(request, driver) {
     let option = JSON.parse(body.option);
     let agent = body.agent;
 
-    return [enrichments.storeMatching(driver, user, option.hash, agent), makeWriteQuery(composeWriteQuery(insertMatchStatement(agent, user, option.wikidata, "http://olaf.datipubblici.org/olaf/statements")))];
+    return [enrichments.storeMatching(driver, user, option.hash, agent), makeWriteQuery(composeWriteQuery(insertMatchStatement(agent, user, option.uri, "http://olaf.datipubblici.org/olaf/statements")))];
 
 }
 
