@@ -525,7 +525,7 @@ module.exports = function(app, passport = null, driver = null) {
 
         enrichments.validateMatching(driver, request.params.agent, () => {
             if(option) {
-                nodeRequest(queries.storeMatching(request.params.agent, option.wikidata), (err, res, body) => {
+                nodeRequest(queries.storeMatching(request.params.agent, option.wikidata || option.uri), (err, res, body) => {
                     if(err) throw err;
                     response.json(option);
                 });
