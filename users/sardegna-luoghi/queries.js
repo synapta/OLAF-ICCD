@@ -149,7 +149,7 @@ function insertMatchStatement(item, user, target, graph) {
     return `INSERT INTO <${graph}> {
         <${item}> <http://www.w3.org/2004/02/skos/core#related> <${statementURI}> .
         <${statementURI}> a rdf:Statement .
-        <${statementURI}> schema:dateCreated "${(new Date()).toISOString()}"^^xsd:dateTimeStamp .
+        <${statementURI}> <http://schema.org/dateCreated> "${(new Date()).toISOString()}"^^xsd:dateTimeStamp .
         <${statementURI}> <http://www.w3.org/2004/02/skos/core#relatedMatch> <${target}> .
         <${statementURI}> <http://xmlns.com/foaf/0.1/maker> <${userURI}> .
         <${userURI}> a <http://xmlns.com/foaf/0.1/Agent> .
