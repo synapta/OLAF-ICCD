@@ -43,7 +43,7 @@ where {
         ?site a cis:Site .
     }
     MINUS  {
-        graph <http://olaf.datipubblici.org/olaf/sameAs/agents> {?site skos:related ?anothersite}
+        graph <http://olaf.datipubblici.org/olaf/sameAs/Sardegna/Sites> {?site skos:closeMatch ?anothersite}
       }
       OPTIONAL {
         GRAPH ?g {
@@ -177,7 +177,7 @@ function insertSkipStatement(item, user, graph) {
 function insertMatchValidation(item, target, graph) {
 
     return `INSERT  INTO <${graph}> {
-            <${item}> owl:sameAs <${target}>
+            <${item}> skos:closeMatch <${target}>
         }
     `;
 
@@ -186,7 +186,7 @@ function insertMatchValidation(item, target, graph) {
 function insertSkipValidation(item,graph) {
 
     return `INSERT INTO <${graph}>  {
-            <${item}> owl:sameAs <http://nomatch.com>
+            <${item}> skos:closeMatch <http://nomatch.com>
         }
     `;
 
@@ -224,11 +224,11 @@ function authorSkip(request, driver) {
 }
 
 function storeMatching(item, target) {
-    return composeWriteQuery(insertMatchValidation(item, target, 'http://olaf.datipubblici.org/olaf/sameAs/things'));
+    return composeWriteQuery(insertMatchValidation(item, target, 'http://olaf.datipubblici.org/olaf/sameAs/Sardegna/Sites'));
 }
 
 function storeSkip(item) {
-    return composeWriteQuery(insertSkipValidation(item, 'http://olaf.datipubblici.org/olaf/sameAs/things'));
+    return composeWriteQuery(insertSkipValidation(item, 'http://olaf.datipubblici.org/olaf/sameAs/Sardegna/Sites'));
 }
 
 // Query composer
