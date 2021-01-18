@@ -2,12 +2,18 @@ const MongoClient  = require('mongodb').MongoClient;
 const nodeRequest  = require('request');
 const promiseRequest = require('request-promise');
 const fs            = require('fs');
+const process       = require('process');
+
+if (!fs.existsSync('./users/'+ process.argv[2] + '/queries.js')) {
+    console.error('Task non trovato')
+    process.exit(1)
+}   
 
 const Config        = require('./config').Config;
-const queries       = require('./users/sardegna/queries');
-const parser        = require('./users/sardegna/parser');
-const enrichments   = require('./users/sardegna/enrichments');
-const config        = new Config(JSON.parse(fs.readFileSync(`./app/js/config/sardegna.json`)));
+const queries       = require('./users/'+ process.argv[2] + '/queries');
+const parser        = require('./users/'+ process.argv[2] + '/parser');
+const enrichments   = require('./users/'+ process.argv[2] + '/enrichments');
+const config        = new Config(JSON.parse(fs.readFileSync('./app/js/config/'+ process.argv[2] + '.json')));
 
 parser.configInit(config);
 
@@ -188,11 +194,11 @@ MongoClient.connect("mongodb://localhost:27017/", (err, client) => {
     console.log('Connected to database');
 
     console.log('Dropped old collection');
-    db.collection('sardegna').drop();
+    db.collection(process.argv[2]).drop();
 
     storeAgents(db, 0, () => {
         console.log('Agents stored');
-        db.collection('sardegna').find({enriched: false, error: {$ne: true}}).count((err, total) => {
+        db.collection(process.argv[2]).find({enriched: false, error: {$ne: true}}).count((err, total) => {
             if(err) throw err;
             recursiveEnrichment(db, 0, total, 0);
         });

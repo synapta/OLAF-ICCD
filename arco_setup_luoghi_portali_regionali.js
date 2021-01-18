@@ -2,17 +2,24 @@ const MongoClient  = require('mongodb').MongoClient;
 const nodeRequest  = require('request');
 const promiseRequest = require('request-promise');
 const fs            = require('fs');
+const process       = require('process');
 const stringSimilarity = require('string-similarity');
 
 const Config        = require('./config').Config;
-const queries       = require('./users/sardegna-contenitori/queries');
-const parser        = require('./users/sardegna-contenitori/parser');
-const enrichments   = require('./users/sardegna-contenitori/enrichments');
-const config        = new Config(JSON.parse(fs.readFileSync(`./app/js/config/sardegna-contenitori.json`)));
+
+if (!fs.existsSync('./users/'+ process.argv[2] + '/queries.js')) {
+    console.error('Task non trovato')
+    process.exit(1)
+}   
+
+const queries       = require('./users/'+ process.argv[2] + '/queries');
+const parser        = require('./users/'+ process.argv[2] + '/parser');
+const enrichments   = require('./users/'+ process.argv[2] + '/enrichments');
+const config        = new Config(JSON.parse(fs.readFileSync('./app/js/config/'+ process.argv[2] + '.json')));
 
 parser.configInit(config);
 
-let iccdPlaces;
+let items;
 
 const database = process.argv[2];
 // Initialize recursive functions
@@ -23,7 +30,7 @@ const sleep = (ms) => {
 
 function createOptions(item) {
     let res = [];
-    iccdPlaces.forEach(el => {
+    items.forEach(el => {
         if ((el.comune.value || '').toLowerCase() === (item.comune|| '').toLowerCase() && stringSimilarity.compareTwoStrings(el.siteLabel.value, item.name) > 0.6 && el.siteLabel.value.length > 0 &&  item.name.length > 0) {
             res.push(el)
             console.log(el,item)
@@ -194,14 +201,14 @@ MongoClient.connect("mongodb://localhost:27017/", (err, client) => {
     console.log('Connected to database');
 
     console.log('Dropped old collection');
-    db.collection('sardegna-contenitori').drop();
+    db.collection(process.argv[2]).drop();
     nodeRequest(queries.getICCDplaces(), (err, res, body) => {
 
-        iccdPlaces = JSON.parse(body).results.bindings;
+        items = JSON.parse(body).results.bindings;
 
         storeAgents(db, 0, () => {
             console.log('Agents stored');
-            db.collection('sardegna-contenitori').find({enriched: false, error: {$ne: true}}).count((err, total) => {
+            db.collection(process.argv[2]).find({enriched: false, error: {$ne: true}}).count((err, total) => {
                 if(err) throw err;
                 recursiveEnrichment(db, 0, total, 0);
             });
