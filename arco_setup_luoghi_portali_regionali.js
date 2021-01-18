@@ -21,7 +21,7 @@ parser.configInit(config);
 
 let items;
 
-const database = process.argv[2];
+const database = arco;
 // Initialize recursive functions
 
 const sleep = (ms) => {
