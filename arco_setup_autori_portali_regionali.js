@@ -17,7 +17,7 @@ const config        = new Config(JSON.parse(fs.readFileSync('./app/js/config/'+ 
 
 parser.configInit(config);
 
-const database = arco;
+const database = 'arco';
 // Initialize recursive functions
 
 const sleep = (ms) => {
