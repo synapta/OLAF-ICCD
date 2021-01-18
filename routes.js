@@ -18,7 +18,7 @@ let enrichments      = null;
 function validateToken(token) {
 
     // Get valid tokens
-    let validTokens = ['arco', 'arco-things', 'sardegna', 'sardegna-luoghi', 'sardegna-contenitori'];
+    let validTokens = ['arco', 'arco-things', 'sardegna', 'sardegna-luoghi', 'sardegna-contenitori', 'lombardia', 'lombardia-luoghi', 'lombardia-contenitori'];
 
     // Check if token is valid
     return validTokens.includes(token);
@@ -163,7 +163,7 @@ messages.messageOpereValidazione = `
 function loginToken(token) {
 
     // Get tokens that need login
-    let loginTokens = ['arco', 'arco-things', 'sardegna', 'sardegna-luoghi','sardegna-contenitori'];
+    let loginTokens = ['arco', 'arco-things', 'sardegna', 'sardegna-luoghi','sardegna-contenitori', 'lombardia', 'lombardia-luoghi','lombardia-contenitori'];
 
     // Check if current token need login
     return loginTokens.includes(token);
@@ -297,7 +297,7 @@ module.exports = function(app, passport = null, driver = null) {
     app.get('/get/:token/modal-text', (request, response) => {
 
         let messageName = "message";
-        if (request.params.token === 'arco' || request.params.token === 'sardegna' ) {
+        if (request.params.token === 'arco' || request.params.token === 'sardegna' || request.params.token === 'lombardia' ) {
             messageName += 'Autori';
         } else if (request.params.token === 'arco-things'  ) { 
             messageName += 'Opere';
@@ -508,7 +508,7 @@ module.exports = function(app, passport = null, driver = null) {
 
         // Compose query
         let requests = queries.authorSkip(request, driver);
-        if(!(configToken === 'arco' ||  configToken === 'arco-things' ||  configToken === 'sardegna' || configToken === 'sardegna-luoghi' || configToken === 'sardegna-contenitori'   ))
+        if(!(configToken === 'arco' ||  configToken === 'arco-things' ||  configToken === 'sardegna' || configToken === 'sardegna-luoghi' || configToken === 'sardegna-contenitori' ||  configToken === 'lombardia' || configToken === 'lombardia-luoghi' || configToken === 'lombardia-contenitori'  ))
             requests = requests.map(req => promiseRequest(req));
 
         // Send requests
