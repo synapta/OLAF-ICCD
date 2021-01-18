@@ -1,0 +1,48 @@
+{
+  "limit" : 1,
+  "selection": "right",
+  "matching": "toggle",
+  "interlinking": true,
+  "fields": {
+    "uri": {
+      "input": "site",
+      "wikidata": "place"
+    },
+    "name": {
+      "input": "sitelabel",
+      "wikidata": "siteLabel"
+    },
+    "type": {
+      "input": null,
+      "wikidata": "tipo"
+    },
+    "description": {
+      "input": null,
+      "wikidata": "desc"
+    },
+    "indirizzo": {
+      "input": "addr",
+      "wikidata": "addr"
+    },
+    "comune": {
+      "input": "city",
+      "wikidata": "comune"
+    },
+    "provincia": {
+      "input": "prov",
+      "wikidata": "provincia"
+    },
+    "regione": {
+      "input": "regione",
+      "wikidata": "regione"
+    },
+    "image": {
+      "input": null,
+      "wikidata": "image"
+    },
+    "opere": {
+      "input": "thingsName",
+      "wikidata": null
+    }
+  }
+}

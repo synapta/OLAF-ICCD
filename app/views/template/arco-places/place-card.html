@@ -1,0 +1,41 @@
+<div class="column">
+    <div class="ui raised segment">
+        <div id="author-fields">
+
+            <a class="ui blue ribbon label"> <i class="fas fa-book"></i> Dettagli luogo</a>
+
+            <p class="author-name">
+                <a target="_blank" href="{{uri}}">
+                    <i id="author-link" class="fas fa-external-link-alt"></i> {{name}}
+                </a>
+            </p>
+
+            {{#image}}
+                <a href="{{.}}" target="_blank">
+                    <div style="background-image: url({{.}});" class="author-image"></div>
+                </a>
+            {{/image}}
+
+
+
+            <a class="ui blue ribbon label"> <i class="fas fa-map-marker-alt"></i> Indirizzo</a>
+            {{#indirizzo}}<p><b>Indirizzo:</b> {{indirizzo}}</p>{{/indirizzo}}
+            {{#comune}}<p><b>Comune:</b> {{comune}}</p>{{/comune}}
+            {{#provincia}}<p><b>Provincia:</b> {{provincia}}</p>{{/provincia}}
+            {{#regione}}<p><b>Regione:</b> {{regione}}</p>{{/regione}}
+
+            {{#opere.length}}
+            <a class="ui blue ribbon label"> <i class="fas fa-bars"></i> Opere contenute</a>
+            <ul class="ui bulleted list card-box">
+                {{#opere}}
+                <li>
+                    <div class="item title">{{.}}</div>
+                </li>
+                {{/opere}}
+            </ul>
+            {{/opere.length}}
+
+        </div>
+
+    </div>
+</div>

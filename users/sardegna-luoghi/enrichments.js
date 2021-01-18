@@ -2,9 +2,9 @@ const nodeRequest = require('request-promise');
 
 // Enrich not enriched authors
 function storeEnrichment(driver, enrichment) {
-    return driver.collection('things').findOneAndUpdate({_id: enrichment.author.uri, enriched: false}, {
+    return driver.collection('sardegna-luoghi').findOneAndUpdate({_id: enrichment.author.uri, enriched: false}, {
         $set: {
-            thing: enrichment.author,
+            place: enrichment.author,
             options: enrichment.options,
             enriched: true,
             timestamp: new Date()
@@ -13,19 +13,19 @@ function storeEnrichment(driver, enrichment) {
 }
 
 function getNotEnrichedAgents(driver, limit, callback) {
-    driver.collection('things').find({enriched: false, error: {$ne: true}}, {limit: limit}).toArray((err, res) => {
+    driver.collection('sardegna-luoghi').find({enriched: false, error: {$ne: true}}, {limit: limit}).toArray((err, res) => {
         if(err) throw err;
         callback(res.map(el => {return {id: el._id, classLabel: el.class}}));
     })
 }
 
 function feedEnrichments(driver, callback, limit = 5) {
-    driver.collection('things').find({enriched: false}, {fields: {_id: 1}, limit: limit}).toArray((err, res) => {
+    driver.collection('sardegna-luoghi').find({enriched: false}, {fields: {_id: 1}, limit: limit}).toArray((err, res) => {
 
         console.log(err);
 
         // Generate requests for each enrichment uri
-        let requests = res.map(el => nodeRequest('http://localhost:3646/api/v1/arco/author/' + encodeURIComponent(el._id) + '/?cache=false'));
+        let requests = res.map(el => nodeRequest('http://localhost:3646/api/v1/sardegna-luoghi/author/' + encodeURIComponent(el._id) + '/?cache=false'));
         Promise.all(requests).then((results) => {
 
             // Parse JSON result
@@ -40,22 +40,22 @@ function feedEnrichments(driver, callback, limit = 5) {
     })
 }
 
-function getAndlockAgent(driver, user, thing, lock, callback) {
+function getAndlockAgent(driver, user, place, lock, callback) {
 
     if(driver) {
 
         // Change behavior on uri existence
         let filter = {};
 
-        if(thing){
-            filter._id = thing;
+        if(place){
+            filter._id = place;
         } else {
             filter = {
                 $or: [
                     {options: {$not: {$size: 0}, $ne: null}, enriched: true},
                     {enriched: false}
                 ],
-                "thing.rawName": { $not: { $in: [ /ambito/i, /bottega/i, /manifattura/i, /produzione/i]}},
+                "place.rawName": { $not: { $in: [ /ambito/i, /bottega/i, /manifattura/i, /produzione/i]}},
                 validated: false,
                 matchedBy: {$nin: [user]},
                 skippedBy: {$nin: [user]}
@@ -63,7 +63,7 @@ function getAndlockAgent(driver, user, thing, lock, callback) {
         }
 
         // Take the lock on the selected document
-        driver.collection('things').findOneAndUpdate(
+        driver.collection('sardegna-luoghi').findOneAndUpdate(
             filter,
             {$set: {lock: lock ? new Date() : null}},
             {returnOriginal: true, sort: {enriched: -1}},
@@ -73,7 +73,7 @@ function getAndlockAgent(driver, user, thing, lock, callback) {
                     console.log("agent not found")
                     getAndlockAgent(driver, user, null, lock, callback);
                 } else {
-                    callback(res.value, res.value.thing, res.value.options);
+                    callback(res.value, res.value.place, res.value.options);
                 }
             }
         );
@@ -84,61 +84,61 @@ function getAndlockAgent(driver, user, thing, lock, callback) {
 }
 
 function deleteValidated(driver, callback) {
-    driver.collection('things').deleteMany({validated: true}, (err, res) => {
+    driver.collection('sardegna-luoghi').deleteMany({validated: true}, (err, res) => {
         if(err) throw err;
         callback();
     })
 }
 
 function resetLocks(driver, callback) {
-    driver.collection('things').updateMany({}, {$set: {lock: null}}, (err, res) => {
+    driver.collection('sardegna-luoghi').updateMany({}, {$set: {lock: null}}, (err, res) => {
         if(err) throw err;
         callback();
     });
 }
 
-function storeMatching(driver, user, option, thing) {
+function storeMatching(driver, user, option, place) {
 
     // Store document
-    let document = {thing: thing, user: user.username, option: option};
+    let document = {place: place, user: user.username, option: option};
 
     // Upsert document and store matching
     return driver.collection('matches').updateOne(document, {$set: Object.assign(document, {timestamp: new Date()})}, {upsert: true}, (err, res) => {
         if(err) throw err;
-        driver.collection('things').updateOne({_id: thing}, {$addToSet: {matchedBy: user.username}});
+        driver.collection('sardegna-luoghi').updateOne({_id: place}, {$addToSet: {matchedBy: user.username}});
     });
 
 }
 
-function skipAgent(driver, user, thing) {
+function skipAgent(driver, user, place) {
 
     // Store document
-    let document = {thing: thing, user: user.username};
+    let document = {place: place, user: user.username};
 
     // Upsert document and store skip
     return driver.collection('skipped').updateOne(document, {$set: Object.assign(document, {timestamp: new Date()})}, {upsert: true}, (err, res) => {
         if(err) throw err;
-        driver.collection('things').updateOne({_id: thing}, {$addToSet: {skippedBy: user.username}});
+        driver.collection('sardegna-luoghi').updateOne({_id: place}, {$addToSet: {skippedBy: user.username}});
     });
 
 }
 
-function getMatchingToValidate(driver, thing, callback) {
+function getMatchingToValidate(driver, place, callback) {
         let filter = {}
 
-    if (thing)
-        filter._id = thing;
+    if (place)
+        filter._id = place;
     else 
         filter = {validated: false, matchedBy: {$not: {$size: 0}}}
-    // Get matches for the given thing
-    driver.collection('things').findOne(filter, (err, enrichment) => {
+    // Get matches for the given place
+    driver.collection('sardegna-luoghi').findOne(filter, (err, enrichment) => {
         if(err) throw err;
         if(!enrichment) callback(null);
         else {
-            driver.collection('matches').find({thing: enrichment._id}).project({option: 1}).toArray((err, matches) => {
+            driver.collection('matches').find({place: enrichment._id}).project({option: 1}).toArray((err, matches) => {
                 if (err) throw err;
                 callback({
-                    author: enrichment.thing,
+                    author: enrichment.place,
                     options: enrichment.options,
                     matches: matches
                 });
@@ -147,13 +147,13 @@ function getMatchingToValidate(driver, thing, callback) {
     })
 }
 
-function validateMatching(driver, thing, callback) {
+function validateMatching(driver, place, callback) {
 
     // Store document and do upsert
-    let document = {thing: thing};
+    let document = {place: place};
 
-    // Set an thing as validate
-    driver.collection('things').findOneAndUpdate({_id: thing}, {$set: {validated: true}}, (err, res) => {
+    // Set an place as validate
+    driver.collection('sardegna-luoghi').findOneAndUpdate({_id: place}, {$set: {validated: true}}, (err, res) => {
         if(err) throw err;
         driver.collection('validations').updateOne(document, {$set: Object.assign(document, {timestamp: new Date()})}, {upsert: true}, (err, res) => {
             if(err) throw err;
@@ -168,7 +168,7 @@ function insertThings(driver, urisClassUsers, callback) {
     let documents = urisClassUsers.map(uriClassUsers => {
         return {
             _id: uriClassUsers.uri,
-            thing: null,
+            place: null,
             options: null,
             enriched: false,
             timestamp: null,
@@ -180,7 +180,7 @@ function insertThings(driver, urisClassUsers, callback) {
         }
     });
 
-    driver.collection('things').insertMany(documents, (err, res) => {
+    driver.collection('sardegna-luoghi').insertMany(documents, (err, res) => {
         if(err) throw err;
         callback();
     })
@@ -188,7 +188,7 @@ function insertThings(driver, urisClassUsers, callback) {
 }
 
 function skipEnrichment(driver, uri) {
-    return driver.collection('things').updateOne({_id: uri.id}, {$set: {error: true}});
+    return driver.collection('sardegna-luoghi').updateOne({_id: uri.id}, {$set: {error: true}});
 }
 
 // Exports

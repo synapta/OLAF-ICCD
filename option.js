@@ -28,7 +28,7 @@ class Option {
 
         // Get Wikidata Map from module
         let map = this.config.getWikidataDictionary();
-        let groupedFields = ['titles', 'roles', 'workStartingDates', 'workEndingDates'];
+        let groupedFields = ['titles', 'roles', 'workStartingDates', 'workEndingDates', 'opere'];
 
         // Parse rawBody in order to populate current object
         Object.keys(map).forEach((key) => {
@@ -138,7 +138,8 @@ class Option {
         if(this.getViafId()) {
             await requests({
                 url: 'https://www.viaf.org/viaf/' + this.getViafId() + '/?httpAccept=application/json',
-                headers: {'User-Agent': 'topolino'}
+                headers: {'User-Agent': 'topolino'},
+                proxy: 'http://10.138.181.7:3128/'
             }).then((response) => {
 
                 // Store response as JSON

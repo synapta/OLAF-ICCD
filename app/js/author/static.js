@@ -403,7 +403,7 @@ $(document).ready(() => {
 
                             // Check empty response
                             if (options.length === 0) {
-                                alert('Non sono presenti match per questo autore.');
+                                alert('Non sono presenti match per questo elemento.');
                                 authorSkip(author.uri);
                             }
 
