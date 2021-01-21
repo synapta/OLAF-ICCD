@@ -45,6 +45,9 @@ where {
     MINUS  {
         graph <http://olaf.datipubblici.org/olaf/sameAs/Sardegna/Sites> {?site skos:closeMatch ?anothersite}
       }
+      MINUS  {
+        graph <http://olaf.datipubblici.org/olaf/sameAs/Sardegna/Sites> {?site a <https://olaf.datipubblici.org/olaf/SkippedEntity>}
+      }
       OPTIONAL {
         GRAPH ?g {
           ?site skos:related ?statement .
@@ -190,7 +193,7 @@ function insertMatchValidation(item, target, graph) {
 function insertSkipValidation(item,graph) {
 
     return `INSERT INTO <${graph}>  {
-            <${item}> skos:closeMatch <http://nomatch.com>
+            <${item}> a <https://olaf.datipubblici.org/olaf/SkippedEntity>
         }
     `;
 

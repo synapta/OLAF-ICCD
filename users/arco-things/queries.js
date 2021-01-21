@@ -50,6 +50,9 @@ let getThings = (index) => {
         MINUS  {
           GRAPH <http://olaf.datipubblici.org/olaf/sameAs/things> {?thing owl:sameAs ?wikidata}
         }
+        MINUS  {
+          graph <http://olaf.datipubblici.org/olaf/sameAs/agents> {?thing a <https://olaf.datipubblici.org/olaf/SkippedEntity> }
+        }
         OPTIONAL {
             ?thing skos:related ?statement .
             ?statement foaf:maker/foaf:mbox_sha1sum ?user .
@@ -389,7 +392,7 @@ function insertMatchValidation(item, target, graph) {
 function insertSkipValidation(item,graph) {
 
     return `INSERT INTO <${graph}>  {
-            <${item}> owl:sameAs <http://nomatch.com>
+            <${item}> a <https://olaf.datipubblici.org/olaf/SkippedEntity>
         }
     `;
 

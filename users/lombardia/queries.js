@@ -58,6 +58,9 @@ let getAgents = (index) => {
       MINUS  {
         ?person owl:sameAs ?wikidata
       }
+      MINUS  {
+        ?person a <https://olaf.datipubblici.org/olaf/SkippedEntity>
+      }
       OPTIONAL {
         GRAPH ?g {
           ?person skos:related ?statement .
@@ -414,7 +417,7 @@ function insertSkipValidation(item, graph) {
 
     return `
         INSERT  INTO <${graph}> {
-            <${item}> owl:sameAs <http://nomatch.com>
+            <${item}> a <https://olaf.datipubblici.org/olaf/SkippedEntity>
         }
     `;
 
