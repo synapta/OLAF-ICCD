@@ -11,7 +11,11 @@
             <a class="ui blue ribbon label">Selezionato da {{.}} utenti</a>
             {{/matches}}
             <div class="author-name">
-                <div class="author-title">{{name}}</div>
+                <div class="author-title">
+                    <a target="_blank" href="{{uri}}">
+                        <i class="fas fa-external-link-alt" aria-hidden="true" style="font-size: 12px; margin-right: 5px;"></i> {{name}}
+                    </a>
+                </div>
                 <div class="author-subtitle">
                     <span>{{type}}</span>
                 </div>
