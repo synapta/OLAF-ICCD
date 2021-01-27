@@ -8,7 +8,7 @@ const passport     = require('passport');
 const flash        = require('connect-flash');
 const Sentry = require('@sentry/node');
 
-Sentry.init({ dsn: 'https://7aa83fb8ca8f4916ade0edc158040113@debug.synapta.io/23' });
+Sentry.init({ dsn: 'https://fc870ffc00134817880aeb7b3b4f3fb8@o505505.ingest.sentry.io/5609958' });
 
 // Setting up express
 const app = express();
@@ -43,6 +43,8 @@ MongoClient.connect("mongodb://localhost:27017/", (err, client) => {
         require('./routes.js')(app, passport);
     else
         require('./routes.js')(app, passport, driver);
+
+    app.use(Sentry.Handlers.errorHandler());
 
     // Notify server uptime
     let server = app.listen(3646, () => {

@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/synapta/olaf2#readme",
   "dependencies": {
-    "@sentry/node": "^5.25.0",
+    "@sentry/node": "^5.30.0",
     "bcrypt": "latest",
     "connect-flash": "latest",
     "connect-mongo": "latest",
@@ -43,7 +43,6 @@
     "request-promise": "latest",
     "require": "^2.4.20",
     "semantic-ui-grid": "^2.4.1",
-    "sentry": "^0.1.2",
     "string-similarity": "^4.0.3",
     "sugar": "latest",
     "underscore": "^1.9.1"
