@@ -150,8 +150,6 @@ let getICCDplaces = () => {
             ?add clvapit:hasCity/rdfs:label ?comune .
             ?add clvapit:hasProvince/rdfs:label ?provincia .
             ?add clvapit:hasRegion <http://dati.beniculturali.it/iccd/cf/resource/Region/Lombardia> .
-            FILTER (lang(?siteLabel) = 'it')
-            FILTER (lang(?desc) = 'it')
             OPTIONAL { ?place foaf:depiction ?image }
             BIND("Lombardia" as ?region)
         }
