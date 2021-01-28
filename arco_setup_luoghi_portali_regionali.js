@@ -4,6 +4,8 @@ const promiseRequest = require('request-promise');
 const fs            = require('fs');
 const process       = require('process');
 const stringSimilarity = require('string-similarity');
+const auth         = require('./users/arco/users');
+
 
 const Config        = require('./config').Config;
 
