@@ -3,6 +3,8 @@ const nodeRequest  = require('request');
 const promiseRequest = require('request-promise');
 const fs            = require('fs');
 const process       = require('process');
+const auth         = require('./users/arco/users');
+
 
 if (!fs.existsSync('./users/'+ process.argv[2] + '/queries.js')) {
     console.error('Task non trovato')

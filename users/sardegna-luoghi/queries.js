@@ -23,7 +23,7 @@ let authorSearch = (name, classLabel) => {
             format: "json"
         },
         json: true,
-        proxy: 'http://10.138.181.7:3128/',
+        //proxy: 'http://10.138.181.7:3128/',
     }
 
 };
@@ -67,31 +67,40 @@ OFFSET ${index*10000}
 
 let authorSelect = (authorId) => {
     return `
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX arco: <https://w3id.org/arco/ontology/arco/>
-PREFIX cis: <http://dati.beniculturali.it/cis/>
-PREFIX arco-loc: <https://w3id.org/arco/ontology/location/>
-PREFIX clvapit: <https://w3id.org/italia/onto/CLV/>
-
-select 
-    ?site 
-    (SAMPLE(?sitelabel) as ?sitelabel ) 
-    (SAMPLE(?addr) as ?addr ) 
-    (SAMPLE(?prov) as ?prov ) 
-    (SAMPLE(?region) as ?regione ) 
-    (SAMPLE(?city) as ?city )
-    (GROUP_CONCAT(DISTINCT(?thingName); separator="$$$") as ?thingsName ) 
-where {
-    graph <https://w3id.org/arco/sardegna/data2> {
-        VALUES ?site {
-            <${authorId}>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+    PREFIX cis: <http://dati.beniculturali.it/cis/>
+    PREFIX arco-loc: <https://w3id.org/arco/ontology/location/>
+    PREFIX clvapit: <https://w3id.org/italia/onto/CLV/>
+    
+    select 
+        ?site 
+        (SAMPLE(?sitelabel) as ?sitelabel ) 
+        (SAMPLE(?addr) as ?addr ) 
+        (SAMPLE(?prov) as ?prov ) 
+        (SAMPLE(?region) as ?regione ) 
+        (SAMPLE(?city) as ?city )
+        (GROUP_CONCAT(DISTINCT(?thingName); separator="$$$") as ?thingsName ) 
+    where {
+        {
+            select ?site ?thingName 
+            where {
+                VALUES ?site {
+                    <${authorId}>
+                }            
+                OPTIONAL {
+                    ?thing arco-loc:hasTimeIndexedTypedLocation/arco-loc:atSite ?site .
+                    ?thing rdfs:label ?thingName .
+                }
+            } LIMIT 20
         }
+        
         ?site a cis:Site ;
             rdfs:label ?sitelabel .
         OPTIONAL { 
             ?site       cis:siteAddress ?add.
-            ?add  	clvapit:fullAddress ?addr.
+            ?add  clvapit:fullAddress ?addr.
             OPTIONAL { ?add clvapit:hasCity/rdfs:label ?city.}
             OPTIONAL { ?add clvapit:hasProvince/rdfs:label ?prov .}
         }
@@ -100,11 +109,10 @@ where {
             ?thing rdfs:label ?thingName .
         }
         BIND("Sardegna" as ?region)
+        FILTER(STR(?siteLabel) != "Site")
+        FILTER(STR(?siteLabel) != "Contenitore fisico")
     }
-    FILTER (STR(?sitelabel) != "Contenitore fisico") 
-}
-GROUP BY ?site
-LIMIT 20`;
+GROUP BY ?site`;
     
 };
 
@@ -142,6 +150,8 @@ let getICCDplaces = () => {
             FILTER (lang(?desc) = 'it')
             OPTIONAL { ?place foaf:depiction ?image }
             BIND("Sardegna" as ?region)
+            FILTER(STR(?siteLabel) != "Site")
+            FILTER(STR(?siteLabel) != "Contenitore fisico")
       }
     } 
     GROUP BY ?place`;

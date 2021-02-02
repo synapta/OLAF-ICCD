@@ -4,6 +4,12 @@ const promiseRequest = require('request-promise');
 const fs            = require('fs');
 const process       = require('process');
 const stringSimilarity = require('string-similarity');
+const auth         = require('./users/arco/users');
+
+let countNome = 0
+let countNomeComune = 0
+let countNomeIndirizzo = 0
+
 
 const Config        = require('./config').Config;
 
@@ -30,14 +36,20 @@ const sleep = (ms) => {
 
 function createOptions(item) {
     let res = [];
+    
     items.forEach(el => {
-        if ((el.comune.value || '').toLowerCase() === (item.comune|| '').toLowerCase() && stringSimilarity.compareTwoStrings(el.siteLabel.value, item.name) > 0.6 && el.siteLabel.value.length > 0 &&  item.name.length > 0) {
+        if (el.siteLabel.value &&  item.name && stringSimilarity.compareTwoStrings(el.siteLabel.value, item.name) > 0.8 && el.siteLabel.value.length > 0 &&  item.name.length > 0 ) {
+
+            countNome++
             res.push(el)
-            console.log(el,item)
+            console.log('trovato per il nome')
+        } else if ( el.siteLabel.value && item.name && el.comune.value &&  item.comune && stringSimilarity.compareTwoStrings(el.comune.value, item.comune) > 0.8 && stringSimilarity.compareTwoStrings(el.siteLabel.value, item.name) > 0.6 && el.siteLabel.value.length > 0 &&  item.name.length > 0) {
+            countNomeComune++;
+            res.push(el)
             console.log('trovato')
-        } else if (el.comune.value.toLowerCase() === (item.comune  || '').toLowerCase() && stringSimilarity.compareTwoStrings(el.addr.value, item.indirizzo) > 0.6 && el.addr.value !== '' &&  item.indirizzo !== '') {
+        } else if ( el.comune.value &&  item.comune &&  stringSimilarity.compareTwoStrings(el.comune.value, item.comune) > 0.8  && stringSimilarity.compareTwoStrings(el.addr.value, item.indirizzo) > 0.6 && el.addr.value !== '' &&  item.indirizzo !== '') {
+            countNomeIndirizzo++;
             res.push(el)
-            console.log(el,item)
             console.log('trovato')
         }
     })
@@ -86,7 +98,6 @@ function retrieveUsers(driver, users) {
 }
 
 function recursiveEnrichment(driver, count, total, errors) {
-
     enrichments.getNotEnrichedAgents(driver, 1, (agents) => {
 
         if (agents) {
@@ -102,7 +113,11 @@ function recursiveEnrichment(driver, count, total, errors) {
                 // Store enrichments
                 Promise.all(enrichment).then((responses) => {
                     console.log((count + responses.length) + '/' + total + ' places enriched');
-                    recursiveEnrichment(driver, count + responses.length, total, 0);
+                    recursiveEnrichment(driver, count + 1, total, 0);
+                    if ( total === count) {
+                        console.log(countNome, countNomeComune, countNomeIndirizzo)
+                        process.exit(0)
+                    }
                 })
 
             }).catch((err) => {
