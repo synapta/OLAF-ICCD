@@ -80,8 +80,7 @@ OFFSET ${index*10000}
 `};
 
 let authorSelect = (authorId) => {
-    return `
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    return `    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX arco: <https://w3id.org/arco/ontology/arco/>
     PREFIX cis: <http://dati.beniculturali.it/cis/>
@@ -89,26 +88,12 @@ let authorSelect = (authorId) => {
     PREFIX clvapit: <https://w3id.org/italia/onto/CLV/>
     
     select 
-select 
-    select 
-        ?site 
-    ?site 
         ?site 
         (SAMPLE(?sitelabel) as ?sitelabel ) 
-    (SAMPLE(?sitelabel) as ?sitelabel ) 
-        (SAMPLE(?sitelabel) as ?sitelabel ) 
-        (SAMPLE(?addr) as ?addr ) 
-    (SAMPLE(?addr) as ?addr ) 
         (SAMPLE(?addr) as ?addr ) 
         (SAMPLE(?prov) as ?prov ) 
-    (SAMPLE(?prov) as ?prov ) 
-        (SAMPLE(?prov) as ?prov ) 
-        (SAMPLE(?region) as ?regione ) 
-    (SAMPLE(?region) as ?regione ) 
         (SAMPLE(?region) as ?regione ) 
         (SAMPLE(?city) as ?city )
-        (GROUP_CONCAT(DISTINCT(?thingName); separator="$$$") as ?thingsName ) 
-    (GROUP_CONCAT(DISTINCT(?thingName); separator="$$$") as ?thingsName ) 
         (GROUP_CONCAT(DISTINCT(?thingName); separator="$$$") as ?thingsName ) 
     where {
         {
@@ -116,8 +101,6 @@ select
             where {
                 VALUES ?site {
                     <${authorId}>
-                }            
-    }
                 }            
                 OPTIONAL {
                     ?thing arco-loc:hasTimeIndexedTypedLocation/arco-loc:atSite ?site .
@@ -128,8 +111,6 @@ select
         
         ?site a cis:Site ;
             rdfs:label ?sitelabel .
-        OPTIONAL { 
-    OPTIONAL { 
         OPTIONAL { 
             ?site       cis:siteAddress ?add.
             ?add  clvapit:fullAddress ?addr.
@@ -144,7 +125,8 @@ select
         FILTER(STR(?sitelabel) != "Site")
         FILTER (STR(?sitelabel) !="Contenitore fisico") 
     }
-GROUP BY ?site`;
+GROUP BY ?site
+`;
 };
 
 let getICCDplaces = () => {
