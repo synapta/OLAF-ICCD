@@ -421,11 +421,13 @@ module.exports = function(app, passport = null, driver = null) {
         if((request.user && request.user.role === 'user') || !request.user || request.query.role === 'user') {
             enrichments.getAndLockAgent(driver, user, agent, cache, (result, author, options) => {
 
+
                 if (result && cache && result.enriched) {
                     // Send stored options and author
                     response.json({author: author, options: options});
+                } else if (result.error) {
+                    response.json(result);
                 } else {
-
                     // Compose author query
                     let queryAuthor = queries.authorSelect(request.params.authorId ? request.params.authorId : result._id);
 

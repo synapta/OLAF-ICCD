@@ -40,9 +40,12 @@ function feedEnrichments(driver, callback, limit = 5) {
     })
 }
 
-function getAndlockAgent(driver, user, place, lock, callback) {
 
-    if(driver) {
+function getAndlockAgent(driver, user, place, lock, callback, count=0) {
+    count++;
+    if( count === 10) {
+        callback({"error": "Non ci sono più candidati da arricchire"}, null, null);
+    } else if(driver) {
 
         // Change behavior on uri existence
         let filter = {};
@@ -70,7 +73,7 @@ function getAndlockAgent(driver, user, place, lock, callback) {
                 if (err) throw err;
                 if (!res.value) {
                     console.log("agent not found")
-                    getAndlockAgent(driver, user, null, lock, callback);
+                    getAndlockAgent(driver, user, null, lock, callback, count);
                 } else {
                     callback(res.value, res.value.place, res.value.options);
                 }

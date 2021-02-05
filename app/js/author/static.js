@@ -373,6 +373,11 @@ $(document).ready(() => {
                         dataType: 'json',
                         success: response => {
 
+                            if (response.error) {
+                                renderNoMoreAgents()
+                                return;
+                            }
+
                             if(!response.author && !response.options && user.role === 'admin'){
                                 $.ajax({
                                     url: authorUrl.includes('?') ? authorUrl + '&role=user' : authorUrl + '?role=user',

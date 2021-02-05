@@ -43,7 +43,7 @@ function feedEnrichments(driver, callback, limit = 5) {
 function getAndlockAgent(driver, user, place, lock, callback, count=0) {
     count++;
     if( count === 10) {
-        callback(null);
+        callback({"error": "Non ci sono più candidati da arricchire"}, null, null);
     } else if(driver) {
 
         // Change behavior on uri existence
