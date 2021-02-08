@@ -5,12 +5,11 @@ Una piattaforma di crowdsourcing per allineare in modo semiautomatico basi di da
 ## Installazione e avvio
 
 Per installare: `npm install`   
-Per avviare: `npm start`   
+Per avviare: `node server.js`   
 
-Ulteriori dettagli in merito alla posizione di OLAF e alle configurazioni 
-**httpd** (apache2) fare riferimento alla [Wiki di Diana](https://wiki.synapta.io/index.php/Diana)
+Il server di OLAF sarà disponibile sulla porta 3646
 
-## Generare database e importare agent e thing
+### Generare database e importare agent e thing
 
 L'unico vincolo relativo all'installazione del database di enrichment è la presenza
 di un'istanza MongoDB alla porta 27017 (standard) locale.
@@ -23,7 +22,7 @@ Il parametro da linea di comando:
 le collections. Se specificata una delle due (agents, things) verrà importata solo quella specificata. Se specificato
 false non importerà nessuna delle due collections.
 
-## Arricchire collection agents e things
+### Arricchire collection agents e things
 
 Consente di arricchire in maniera asincrona le collezioni agents e things.
 
@@ -36,6 +35,30 @@ avviare l'enrichment mediante Wikidata.
 
 - **limit**: opzionale. Imposta il limite dei processi di enrichment, ovvero il numero di agenti che vengono arricchiti
 simultaneamente. NB. un numero minore diminuisce la possibilità di incorrere in errori con Wikidata.
+
+### Generare ed arricchire gli item provenienti dai portali regionali
+
+#### Autori
+
+Per generare ed arricchire gli autori delle opere presenti nei portali regionali è necessario lanciare il comando (al momenti i valori ammessi come regione sono `sardegna` e `lombardia`): 
+
+```BASH
+node arco_setup_autori_portali_regionali.js *regione*
+```
+
+#### Luoghi
+
+Per generare i match relativi ai luoghi provenienti dai portali regionali è necessario lanciare il comando: 
+
+```BASH
+node arco_setup_autori_portali_regionali.js *task*
+```
+I valori ammessi al posto di `*task*` sono:
+
+* `sardegna-luoghi` per generare i possibili match tra i luoghi della cultura e i luoghi provenienti dal portale della sardegna.
+* `lombardia-luoghi` per generare i possibili match tra i luoghi della cultura e i luoghi provenienti dal portale della lombardia.
+* `sardegna-contenitori` per generare i possibili match tra i contenitori fisici e i luoghi provenienti dal portale della sardegna.
+* `lombardia-contenitori` per generare i possibili match tra i contenitori fisici e i luoghi provenienti dal portale della lombardia.
 
 ## Flusso di configurazione
 
